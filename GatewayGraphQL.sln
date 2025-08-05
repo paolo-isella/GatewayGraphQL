@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayGraphQL", "GatewayGraphQL\GatewayGraphQL.csproj", "{A66ECF41-A046-4BA7-B616-9D36DCC9E7FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reviews", "Reviews\Reviews.csproj", "{FFF30334-2F66-4D8F-BD21-7EF95A489C90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts", "Accounts\Accounts.csproj", "{914591B1-2268-4C21-9075-A29F072B0676}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A66ECF41-A046-4BA7-B616-9D36DCC9E7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66ECF41-A046-4BA7-B616-9D36DCC9E7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66ECF41-A046-4BA7-B616-9D36DCC9E7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66ECF41-A046-4BA7-B616-9D36DCC9E7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF30334-2F66-4D8F-BD21-7EF95A489C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF30334-2F66-4D8F-BD21-7EF95A489C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF30334-2F66-4D8F-BD21-7EF95A489C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF30334-2F66-4D8F-BD21-7EF95A489C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914591B1-2268-4C21-9075-A29F072B0676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914591B1-2268-4C21-9075-A29F072B0676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914591B1-2268-4C21-9075-A29F072B0676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914591B1-2268-4C21-9075-A29F072B0676}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
