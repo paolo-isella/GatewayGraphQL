@@ -7,13 +7,13 @@ public static class Query
 {
     public static IQueryable<User> GetUsers()
         => Repo.Users.OrderByDescending(t => t.Id).AsQueryable();
-    
-    public static async Task<User?> GetUserById(int id)
+
+    public static User? GetUserById(int id)
         => Repo.Users.FirstOrDefault(u => u.Id == id);
-    
-    public static async Task<IQueryable<User>?> GetUsersById(int[] ids)
+
+    public static IQueryable<User> GetUsersById(int[] ids)
         => Repo.Users.Where(u => ids.Contains(u.Id)).AsQueryable();
-    
-    public static async Task<User> GetUsersByUsername(string username)
+
+    public static User? GetUserByUsername(string username)
         => Repo.Users.FirstOrDefault(u => u.Username == username);
 }
