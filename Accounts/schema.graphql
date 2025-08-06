@@ -6,7 +6,7 @@ type Query {
   users: [User!]! @cost(weight: "10")
   userById(id: Int!): User @cost(weight: "10")
   usersById(ids: [Int!]!): [User!] @cost(weight: "10")
-  usersByUsername(username: String!): User! @cost(weight: "10")
+  userByUsername(username: String!): User! @cost(weight: "10")
 }
 
 type User {
