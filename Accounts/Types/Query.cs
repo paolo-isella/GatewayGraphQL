@@ -7,18 +7,18 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<User> GetUsers()
-        => Repo.Users.AsQueryable();
+    public IQueryable<User> GetUsers(AccountDbContext context)
+        => context.Users.AsQueryable();
 
-    public User? GetUserById(int id)
-        => Repo.Users.FirstOrDefault(u => u.Id == id);
+    public User? GetUserById(int id, AccountDbContext context)
+        => context.Users.FirstOrDefault(u => u.Id == id);
 
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<User> GetUsersById(int[] ids)
-        => Repo.Users.Where(u => ids.Contains(u.Id)).AsQueryable();
+    public IQueryable<User> GetUsersById(int[] ids, AccountDbContext context)
+        => context.Users.Where(u => ids.Contains(u.Id)).AsQueryable();
 
-    public User? GetUserByUsername(string username)
-        => Repo.Users.FirstOrDefault(u => u.Username == username);
+    public User? GetUserByUsername(string username, AccountDbContext context)
+        => context.Users.FirstOrDefault(u => u.Username == username);
 }
