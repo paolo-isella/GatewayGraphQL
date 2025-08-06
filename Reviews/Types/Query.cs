@@ -1,49 +1,48 @@
-﻿using Reviews.Data;
+﻿using HotChocolate;
+using HotChocolate.Data;
+using Reviews.Data;
+using System.Linq;
 
 namespace Reviews.Types;
 
-[QueryType]
-public static class Query
+public class Query
 {
     // [UseProjection]
     // [UseFiltering]
     // [UseSorting]
-    public static async Task<Review?> GetReviewById(
-        int id,
-        ReviewByIdDataLoader reviewById,
-        CancellationToken cancellationToken)
-        => await reviewById.LoadAsync(id, cancellationToken);
+    public static Review? GetReviewById(int id)
+        => Repo.Reviews.FirstOrDefault(r => r.Id == id);
     
-    // [UsePaging]
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static IQueryable<Review> GetReviews()
-        => Repo.Reviews.OrderByDescending(t => t.Id).AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Review> GetReviews(int? skip, int? take)
+        => Repo.Reviews
+            .OrderByDescending(t => t.Id)
+            .Skip(skip ?? 0)
+            .Take(take ?? int.MaxValue)
+            .AsQueryable();
     
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static async Task<User?> GetUserById(
-        int id,
-        UserByIdDataLoader userById,
-        CancellationToken cancellationToken)
-        => await userById.LoadAsync(id, cancellationToken);
+    public User? GetUserById(int id)
+        => Repo.Users.FirstOrDefault(u => u.Id == id);
     
-    // [UsePaging]
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static async Task<IQueryable<User>?> GetUsersById(
-        int[] ids,
-        UserByIdDataLoader userById,
-        CancellationToken cancellationToken)
-        => (await userById.LoadAsync(ids, cancellationToken)).AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<User>? GetUsersById(int[] ids, int? skip, int? take)
+        => Repo.Users.Where(u => ids.Contains(u.Id))
+            .OrderBy(t => t.Name)
+            .Skip(skip ?? 0)
+            .Take(take ?? int.MaxValue)
+            .AsQueryable();
     
-    // [UsePaging]
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static IQueryable<User>? GetUsers()
-        => Repo.Users.OrderBy(t => t.Name).AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<User>? GetUsers(int? skip, int? take)
+        => Repo.Users
+            .OrderBy(t => t.Name)
+            .Skip(skip ?? 0)
+            .Take(take ?? int.MaxValue)
+            .AsQueryable();
 }

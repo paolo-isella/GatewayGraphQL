@@ -1,4 +1,7 @@
-﻿using Reviews.Data;
+﻿using HotChocolate;
+using HotChocolate.Data;
+using Reviews.Data;
+using System.Linq;
 
 namespace Reviews.Types;
 
@@ -12,18 +15,19 @@ public class User
 }
 
 [ExtendObjectType<User>]
-public static class UserNode
+public class UserNode
 {
-    public static async Task<IQueryable<Review>> GetReviewsAsync(
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Review> GetReviewsAsync(
         [Parent] User user,
-        IReviewsByUserIdDataLoader reviewsById,
-        CancellationToken cancellationToken)
-        => (await reviewsById.LoadAsync(user.Id, cancellationToken)).AsQueryable();
-
-    [DataLoader]
-    public static async Task<IReadOnlyDictionary<int, User>> GetUserByIdAsync(
-        IReadOnlyList<int> ids)
-        => Repo.Users
-            .Where(t => ids.Contains(t.Id))
-            .ToDictionary(t => t.Id);
+        int? skip,
+        int? take)
+        => Repo.Reviews
+            .Where(r => r.User.Id == user.Id)
+            .OrderByDescending(t => t.Id)
+            .Skip(skip ?? 0)
+            .Take(take ?? int.MaxValue)
+            .AsQueryable();
 }
