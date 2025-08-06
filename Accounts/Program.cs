@@ -10,8 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
     });
 
     builder.Services.AddGraphQLServer()
-        .AddQueryType()
-        .AddTypeExtension<Query>()
+        .AddType<Query>()
         .AddProjections()
         .AddFiltering()
         .AddSorting();

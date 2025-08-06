@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
 {
     //https://studio.apollographql.com/sandbox/explorer
     options.AddDefaultPolicy(b => 
-        b.WithOrigins("https://studio.apollographql.com").AllowAnyHeader().AllowAnyMethod());   
+        b.WithOrigins("https://nitro.chillicream.com").AllowAnyHeader().AllowAnyMethod());   
 });
 
 builder.Services
