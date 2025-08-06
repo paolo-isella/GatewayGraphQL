@@ -1,4 +1,4 @@
-﻿using Accounts.Data;
+using Accounts.Data;
 
 namespace Accounts.Types;
 
