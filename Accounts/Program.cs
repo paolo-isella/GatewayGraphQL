@@ -1,3 +1,5 @@
+using Accounts.Types;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddCors(options =>
@@ -8,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
     });
 
     builder.Services.AddGraphQLServer()
-        .AddAccountsTypes()
+        .AddType<Query>()
         .AddProjections()
         .AddFiltering()
         .AddSorting();

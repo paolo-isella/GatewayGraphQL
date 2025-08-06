@@ -2,48 +2,31 @@
 
 namespace Reviews.Types;
 
-[QueryType]
-public static class Query
+public class Query
 {
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static async Task<Review?> GetReviewById(
-        int id,
-        ReviewByIdDataLoader reviewById,
-        CancellationToken cancellationToken)
-        => await reviewById.LoadAsync(id, cancellationToken);
+    public static Review? GetReviewById(int id)
+        => Repo.Reviews.FirstOrDefault(r => r.Id == id);
     
-    // [UsePaging]
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static IQueryable<Review> GetReviews()
-        => Repo.Reviews.OrderByDescending(t => t.Id).AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Review> GetReviews()
+        => Repo.Reviews.AsQueryable();
     
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static async Task<User?> GetUserById(
-        int id,
-        UserByIdDataLoader userById,
-        CancellationToken cancellationToken)
-        => await userById.LoadAsync(id, cancellationToken);
+    public User? GetUserById(int id)
+        => Repo.Users.FirstOrDefault(u => u.Id == id);
     
-    // [UsePaging]
-    // [UseProjection]
-    // [UseFiltering]
-    // [UseSorting]
-    public static async Task<IQueryable<User>?> GetUsersById(
-        int[] ids,
-        UserByIdDataLoader userById,
-        CancellationToken cancellationToken)
-        => (await userById.LoadAsync(ids, cancellationToken)).AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<User>? GetUsersById(int[] ids)
+        => Repo.Users.Where(u => ids.Contains(u.Id)).AsQueryable();
     
-    // [UsePaging]
+    // questo provare a mettere e togliere dopo avere creato i db context per vedere l'effetto sulle query
+    // potrebbe andare ad interferire mala con l'equivalente di Accounts
     // [UseProjection]
     // [UseFiltering]
     // [UseSorting]
-    public static IQueryable<User>? GetUsers()
-        => Repo.Users.OrderBy(t => t.Name).AsQueryable();
+    // public IQueryable<User>? GetUsers()
+    //     => Repo.Users.AsQueryable();
 }

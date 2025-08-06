@@ -1,3 +1,5 @@
+using Reviews.Types;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddCors(options =>
@@ -8,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
     });
 
     builder.Services.AddGraphQLServer()
-        .AddReviewsTypes()
+        .AddType<Query>()
+        .AddTypeExtension<UserNode>()
+        .AddTypeExtension<ReviewNode>()
         .AddProjections()
         .AddFiltering()
         .AddSorting();
