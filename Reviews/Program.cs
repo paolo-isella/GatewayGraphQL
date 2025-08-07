@@ -19,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
         .AddType<Query>()
         .AddTypeExtension<UserNode>()
         .AddTypeExtension<ReviewNode>()
+        .AddPagingArguments()
         .AddProjections()
         .AddFiltering()
         .AddSorting();
