@@ -5,31 +5,11 @@
 namespace Reviews.Migrations
 {
     /// <inheritdoc />
-    public partial class Populate : Migration
+    public partial class PopulateV2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Seed Users
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Ada Lovelace" },
-                    { 2, "Alan Turing" }
-                });
-
-            // Seed Products
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id" },
-                values: new object[,]
-                {
-                    { 1 },
-                    { 2 }
-                });
-
             // Seed Reviews
             migrationBuilder.InsertData(
                 table: "Reviews",
@@ -50,16 +30,6 @@ namespace Reviews.Migrations
                 table: "Reviews",
                 keyColumn: "Id",
                 keyValues: new object[] { 1, 2, 3, 4 });
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValues: new object[] { 1, 2 });
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValues: new object[] { 1, 2 });
         }
     }
 }

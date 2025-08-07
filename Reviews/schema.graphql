@@ -20,12 +20,12 @@ type Review {
   stars: Int!
   productId: Int!
   product: Product!
+  userId: Int!
   user: User! @cost(weight: "10")
 }
 
 type User {
   id: Int!
-  name: String
   reviews(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
 }
 
@@ -71,7 +71,6 @@ input ReviewFilterInput {
   productId: IntOperationFilterInput
   product: ProductFilterInput
   userId: IntOperationFilterInput
-  user: UserFilterInput
 }
 
 input ReviewSortInput {
@@ -81,7 +80,6 @@ input ReviewSortInput {
   productId: SortEnumType @cost(weight: "10")
   product: ProductSortInput @cost(weight: "10")
   userId: SortEnumType @cost(weight: "10")
-  user: UserSortInput @cost(weight: "10")
 }
 
 input StringOperationFilterInput {
@@ -103,12 +101,10 @@ input UserFilterInput {
   and: [UserFilterInput!]
   or: [UserFilterInput!]
   id: IntOperationFilterInput
-  name: StringOperationFilterInput
 }
 
 input UserSortInput {
   id: SortEnumType @cost(weight: "10")
-  name: SortEnumType @cost(weight: "10")
 }
 
 enum SortEnumType {
