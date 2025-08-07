@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Reviews;
 using Reviews.Types;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
         options.AddDefaultPolicy(b => 
             b.WithOrigins("https://nitro.chillicream.com").AllowAnyHeader().AllowAnyMethod());
     });
+    
+    builder.Services.AddDbContextFactory<ReviewDbContext>(opt => opt
+        .UseSqlite("Data Source=app.db")
+        .EnableSensitiveDataLogging());
 
     builder.Services.AddGraphQLServer()
         .AddType<Query>()

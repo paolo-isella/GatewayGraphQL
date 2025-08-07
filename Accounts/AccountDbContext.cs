@@ -1,4 +1,4 @@
-﻿using Accounts.Data;
+﻿using Accounts.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Accounts;

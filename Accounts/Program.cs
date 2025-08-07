@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
     });
 
     builder.Services.AddDbContextFactory<AccountDbContext>(opt => opt
-        .UseNpgsql(builder.Configuration.GetConnectionString("AccountDbContext"))
+        .UseSqlite("Data Source=app.db")
         .EnableSensitiveDataLogging());
     
     builder.Services.AddGraphQLServer()

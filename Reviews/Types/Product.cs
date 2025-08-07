@@ -1,15 +1,7 @@
-﻿using Reviews.Data;
+﻿namespace Reviews.Types;
 
-namespace Reviews.Types;
-
-public sealed class Product
+public class Product
 {
-    public Product(int id)
-    {
-        Id = id;
-    }
-
-    public int Id { get; }
-
-    public IQueryable<Review> GetReviews() => Repo.Reviews.AsQueryable();
+    public int Id { get;  set; }
+    public List<Review> Reviews { get; set; }
 }

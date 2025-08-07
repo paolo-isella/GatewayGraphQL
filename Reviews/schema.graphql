@@ -2,6 +2,11 @@ schema {
   query: Query
 }
 
+type Product {
+  id: Int!
+  reviews: [Review!]!
+}
+
 type Query {
   reviews(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
   userById(id: Int!): User
@@ -13,6 +18,7 @@ type Review {
   body: String
   stars: Int!
   productId: Int!
+  product: Product!
   user: User! @cost(weight: "10")
 }
 
@@ -37,6 +43,24 @@ input IntOperationFilterInput {
   nlte: Int @cost(weight: "10")
 }
 
+input ListFilterInputTypeOfReviewFilterInput {
+  all: ReviewFilterInput @cost(weight: "10")
+  none: ReviewFilterInput @cost(weight: "10")
+  some: ReviewFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input ProductFilterInput {
+  and: [ProductFilterInput!]
+  or: [ProductFilterInput!]
+  id: IntOperationFilterInput
+  reviews: ListFilterInputTypeOfReviewFilterInput
+}
+
+input ProductSortInput {
+  id: SortEnumType @cost(weight: "10")
+}
+
 input ReviewFilterInput {
   and: [ReviewFilterInput!]
   or: [ReviewFilterInput!]
@@ -44,6 +68,7 @@ input ReviewFilterInput {
   body: StringOperationFilterInput
   stars: IntOperationFilterInput
   productId: IntOperationFilterInput
+  product: ProductFilterInput
   userId: IntOperationFilterInput
   user: UserFilterInput
 }
@@ -53,6 +78,7 @@ input ReviewSortInput {
   body: SortEnumType @cost(weight: "10")
   stars: SortEnumType @cost(weight: "10")
   productId: SortEnumType @cost(weight: "10")
+  product: ProductSortInput @cost(weight: "10")
   userId: SortEnumType @cost(weight: "10")
   user: UserSortInput @cost(weight: "10")
 }

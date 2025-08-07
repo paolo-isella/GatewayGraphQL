@@ -1,4 +1,4 @@
-﻿namespace Accounts.Data;
+﻿namespace Accounts.Models;
 
 public class User
 {
