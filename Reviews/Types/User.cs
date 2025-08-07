@@ -8,11 +8,11 @@ public class User
 }
 
 [ExtendObjectType<User>]
-public class UserNode
+public static class UserNode
 {
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Review> GetReviews([Parent] User user, ReviewDbContext context)
+    public static IQueryable<Review> GetReviews([Parent] User user, ReviewDbContext context)
         => context.Reviews.Where(r => r.User.Id == user.Id).AsQueryable();
 }

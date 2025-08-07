@@ -17,8 +17,6 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddGraphQLServer()
         .AddReviewsTypes()
-        .AddTypeExtension<UserNode>()
-        .AddTypeExtension<ReviewNode>()
         .AddPagingArguments()
         .AddProjections()
         .AddFiltering()

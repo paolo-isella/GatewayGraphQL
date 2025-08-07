@@ -13,9 +13,9 @@ public class Review
     public User? User { get; set; }
 }
 
-[ExtendObjectType<Review>(IgnoreProperties = new[] { nameof(Review.UserId) })]
-public class ReviewNode
+[ExtendObjectType<Review>(IgnoreProperties = [nameof(Review.UserId)])]
+public static class ReviewNode
 {
-    public Task<User> GetUserAsync([Parent] Review review)
+    public static Task<User> GetUserAsync([Parent] Review review)
         => Task.FromResult(review.User!);
 }
