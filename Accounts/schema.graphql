@@ -4,9 +4,9 @@ schema {
 
 type Query {
   users(where: UserFilterInput @cost(weight: "10") order: [UserSortInput!] @cost(weight: "10")): [User!]! @cost(weight: "10")
-  userById(id: Int!): User
+  userById(id: Int!): User @cost(weight: "10")
   usersById(ids: [Int!]! where: UserFilterInput @cost(weight: "10") order: [UserSortInput!] @cost(weight: "10")): [User!]! @cost(weight: "10")
-  userByUsername(username: String!): User
+  userByUsername(username: String!): User @cost(weight: "10")
 }
 
 type User {

@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
         .EnableSensitiveDataLogging());
 
     builder.Services.AddGraphQLServer()
-        .AddType<Query>()
+        .AddReviewsTypes()
         .AddTypeExtension<UserNode>()
         .AddTypeExtension<ReviewNode>()
         .AddPagingArguments()

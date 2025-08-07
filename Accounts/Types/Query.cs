@@ -2,23 +2,27 @@ using Accounts.Models;
 
 namespace Accounts.Types;
 
-public class Query
+public static class Query
 {
+    [Query]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<User> GetUsers(AccountDbContext context)
+    public static IQueryable<User> GetUsers(AccountDbContext context)
         => context.Users.AsQueryable();
 
-    public User? GetUserById(int id, AccountDbContext context)
+    [Query]
+    public static User? GetUserById(int id, AccountDbContext context)
         => context.Users.FirstOrDefault(u => u.Id == id);
 
+    [Query]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<User> GetUsersById(int[] ids, AccountDbContext context)
+    public static IQueryable<User> GetUsersById(int[] ids, AccountDbContext context)
         => context.Users.Where(u => ids.Contains(u.Id)).AsQueryable();
 
-    public User? GetUserByUsername(string username, AccountDbContext context)
+    [Query]
+    public static User? GetUserByUsername(string username, AccountDbContext context)
         => context.Users.FirstOrDefault(u => u.Username == username);
 }

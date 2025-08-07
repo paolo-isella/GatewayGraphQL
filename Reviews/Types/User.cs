@@ -13,6 +13,6 @@ public class UserNode
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Review> GetReviewsAsync([Parent] User user, ReviewDbContext context)
+    public IQueryable<Review> GetReviews([Parent] User user, ReviewDbContext context)
         => context.Reviews.Where(r => r.User.Id == user.Id).AsQueryable();
 }

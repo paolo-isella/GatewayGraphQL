@@ -8,8 +8,9 @@ type Product {
 }
 
 type Query {
+  reviewById(id: Int!): Review @cost(weight: "10")
   reviews(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
-  userById(id: Int!): User
+  userById(id: Int!): User @cost(weight: "10")
   usersById(ids: [Int!]! where: UserFilterInput @cost(weight: "10") order: [UserSortInput!] @cost(weight: "10")): [User!] @cost(weight: "10")
 }
 
@@ -25,7 +26,7 @@ type Review {
 type User {
   id: Int!
   name: String
-  reviewsAsync(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
+  reviews(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
 }
 
 input IntOperationFilterInput {
