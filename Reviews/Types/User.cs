@@ -30,10 +30,17 @@ internal static class DataLoaders
         QueryContext<Review> query,
         ReviewDbContext context,
         CancellationToken cancellationToken
-    ) =>
-        await context
-            .Reviews.Where(t => userIds.Contains(t.UserId))
-            .Where(query.Predicate!)
+    )
+    {
+        var reviews = context.Reviews.Where(t => userIds.Contains(t.UserId));
+
+        if (query.Predicate is not null)
+        {
+            reviews = reviews.Where(query.Predicate!);
+        }
+
+        return await reviews
             .GroupBy(t => t.UserId)
             .ToDictionaryAsync(t => t.Key, t => t.ToArray(), cancellationToken);
+    }
 }

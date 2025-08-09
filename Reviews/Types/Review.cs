@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Reviews.Types;
 
 public class Review
@@ -15,6 +17,23 @@ public class Review
 [ExtendObjectType<Review>]
 public static class ReviewNode
 {
-    public static User GetUser([Parent] Review review) =>
-        new() { Id = review.UserId };
+    public static User GetUser([Parent] Review review) => new() { Id = review.UserId };
+
+    public static Task<Product?> GetProduct(
+        [Parent] Review review,
+        IProductByIdDataLoader loader
+    ) => loader.LoadAsync(review.ProductId);
+}
+
+internal static class ProductDataLoader
+{
+    [DataLoader]
+    public static async Task<Dictionary<int, Product>> GetProductByIdAsync(
+        IReadOnlyList<int> productIds,
+        ReviewDbContext context,
+        CancellationToken cancellationToken
+    ) =>
+        await context
+            .Products.Where(t => productIds.Contains(t.Id))
+            .ToDictionaryAsync(t => t.Id, cancellationToken);
 }

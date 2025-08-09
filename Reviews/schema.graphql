@@ -19,7 +19,7 @@ type Review {
   body: String
   stars: Int!
   productId: Int!
-  product: Product!
+  product: Product @cost(weight: "10")
   userId: Int!
   user: User! @cost(weight: "10")
 }
