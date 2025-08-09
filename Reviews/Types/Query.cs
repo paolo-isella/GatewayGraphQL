@@ -7,6 +7,7 @@ public static class Query
         context.Reviews.FirstOrDefault(r => r.Id == id);
 
     [Query]
+    [UsePaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]

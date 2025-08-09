@@ -5,6 +5,7 @@ namespace Accounts.Types;
 public static class Query
 {
     [Query]
+    [UsePaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
