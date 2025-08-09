@@ -17,8 +17,9 @@ public static class UserNode
     [UseSorting]
     public static async Task<Review[]> GetReviews(
         [Parent] User user,
+        QueryContext<Review> query,
         IReviewsByUserIdDataLoader loader
-    ) => await loader.LoadAsync(user.Id) ?? [];
+    ) => await loader.With(query).LoadAsync(user.Id) ?? [];
 }
 
 internal static class DataLoaders
@@ -26,11 +27,13 @@ internal static class DataLoaders
     [DataLoader]
     public static async Task<Dictionary<int, Review[]>> GetReviewsByUserIdAsync(
         IReadOnlyList<int> userIds,
+        QueryContext<Review> query,
         ReviewDbContext context,
         CancellationToken cancellationToken
     ) =>
         await context
             .Reviews.Where(t => userIds.Contains(t.UserId))
+            .Where(query.Predicate!)
             .GroupBy(t => t.UserId)
             .ToDictionaryAsync(t => t.Key, t => t.ToArray(), cancellationToken);
 }
