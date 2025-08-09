@@ -9,8 +9,8 @@ public class User
     public int Id { get; set; }
 }
 
-[ExtendObjectType<User>]
-public static class UserNode
+[ObjectType<User>]
+public static partial class UserNode
 {
     [UseProjection]
     [UseFiltering]

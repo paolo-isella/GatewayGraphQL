@@ -14,8 +14,8 @@ public class Review
     public int UserId { get; set; }
 }
 
-[ExtendObjectType<Review>]
-public static class ReviewNode
+[ObjectType<Review>]
+public static partial class ReviewNode
 {
     public static User GetUser([Parent] Review review) => new() { Id = review.UserId };
 

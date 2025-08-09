@@ -27,13 +27,13 @@ type Query {
 }
 
 type Review {
+  user: User!
+  product: Product @cost(weight: "10")
   id: Int!
   body: String
   stars: Int!
   productId: Int!
-  product: Product @cost(weight: "10")
   userId: Int!
-  user: User! @cost(weight: "10")
 }
 
 "A connection to a list of items."
@@ -55,8 +55,8 @@ type ReviewsEdge {
 }
 
 type User {
-  id: Int!
   reviews(where: ReviewFilterInput @cost(weight: "10") order: [ReviewSortInput!] @cost(weight: "10")): [Review!]! @cost(weight: "10")
+  id: Int!
 }
 
 input IntOperationFilterInput {
