@@ -22,7 +22,7 @@ public static partial class UserNode
     ) => await loader.With(query).LoadAsync(user.Id) ?? [];
 }
 
-internal static class DataLoaders
+internal static class UserDataLoaders
 {
     [DataLoader]
     public static async Task<Dictionary<int, Review[]>> GetReviewsByUserIdAsync(

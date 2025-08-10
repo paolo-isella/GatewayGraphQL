@@ -36,11 +36,11 @@ type Query {
 type Review {
   user: User!
   product: Product @cost(weight: "10")
+  lifeCycles(where: LifeCycleFilterInput @cost(weight: "10") order: [LifeCycleSortInput!] @cost(weight: "10")): [LifeCycle!]! @cost(weight: "10")
   id: Int!
   body: String
   stars: Int!
   productId: Int!
-  lifeCycles: [LifeCycle!]!
   userId: Int!
 }
 
@@ -104,6 +104,13 @@ input LifeCycleFilterInput {
   startDate: DateTimeOperationFilterInput
   endDate: DateTimeOperationFilterInput
   review: ReviewFilterInput
+}
+
+input LifeCycleSortInput {
+  id: SortEnumType @cost(weight: "10")
+  startDate: SortEnumType @cost(weight: "10")
+  endDate: SortEnumType @cost(weight: "10")
+  review: ReviewSortInput @cost(weight: "10")
 }
 
 input ListFilterInputTypeOfLifeCycleFilterInput {
