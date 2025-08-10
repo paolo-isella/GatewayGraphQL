@@ -7,4 +7,5 @@ public class ReviewDbContext(DbContextOptions<ReviewDbContext> opt) : DbContext(
 {
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<LifeCycle> LifeCycles { get; set; }
 }
